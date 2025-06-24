@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <style>
+    body {height: 100vh; width: 100vw}
+  </style>
+  <title>Test Task</title>
+</head>
+<body class="align-items-center d-flex justify-content-center">
+  <main class="flex-column d-flex h-25 justify-content-center w-50">
+    <div class="h-50" id="text">
+      <p style="user-select: none">Свёрнутый текст тестового задания...</p>
+      <p hidden>На странице есть абзац с текстом задания, кнопка №1 и кнопка №2. Напишите скрипт, который по нажатию сперва на кнопку №1 и далее на кнопку №2 скрывает абзац, если текст раскрыт, или раскрывает, если текст скрыт.</p>
+    </div>
+    <div class="d-flex h-25 justify-content-evenly">
+      <button class="btn btn-primary w-25" id="№1" type="button">Развернуть</button>
+      <button class="btn btn-danger w-25" disabled id="№2" type="button">OK</button>
+    </div>
+  </main>
+  <script>
+    class Test
+    {
+      button_one = document.getElementById('№1');
+      button_two = document.getElementById('№2');
+      paragraph = document.getElementById('text');
+      
+      constructor()
+      {
+        this.button_one.addEventListener('click', () =>
+        {
+          this.toggleButtonTwo();
+        });
+        this.button_two.addEventListener('click', () =>
+        {
+          this.toggleParagraph();
+          this.toggleButtonTwo();
+          this.toggleButtonOne();
+        });
+      }
+      
+      toggleButtonOne()
+      {
+        this.button_one.textContent = this.paragraph.firstElementChild.hidden ? 'Свернуть' : 'Развернуть';
+      }
+      
+      toggleButtonTwo()
+      {
+        this.button_two.classList.toggle('btn-danger');
+        this.button_two.classList.toggle('btn-success');
+        this.button_two.disabled = !this.button_two.disabled;
+      }
+      
+      toggleParagraph()
+      {
+        Array.from(this.paragraph.getElementsByTagName('p')).forEach(paragraph => paragraph.hidden = !paragraph.hidden);
+      }
+    }
+    const test = new Test();
+  </script>
+</body>
+</html>
